@@ -9,17 +9,29 @@
 
 
 const express = require('express')
+const blog = require('./Controllers/postcontroller.js')
 const posts = require('./Controllers/postcontroller.js')
 const app = express()
 app.use(express.static('public'))
 const host = 'http://127.0.0.1'
 const port = 3000
+console.log(posts);
 
-app.get('/', (req, res) => { 
-    const markup = `
-    <h1>Benvenuto nel mio blog!</h1>
-    <img src="/img/f7a5b5a8-4cb2-403c-af51-70c820cd0837.webp" alt="post">
-    `
+app.get('/', (req, res) => {
+    posts.forEach(post => {
+        const {titolo, contenuto, immagine, tags} = post
+       
+        const markup = `
+     <h1>${titolo}</h1>
+     <p>${contenuto}</p>
+     <img src="${immagine}" alt="post">
+     <p>${tags}</p>
+     `
+     return markup
+    });
+
+
+
     res.send(markup)
 })
 
@@ -29,4 +41,4 @@ app.listen(port, () => {
 
 
 
- app.get('/post', posts.index)
+app.get('/post', blog.index)
