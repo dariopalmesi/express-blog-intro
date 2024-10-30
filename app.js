@@ -11,11 +11,16 @@
 const express = require('express')
 const posts = require('./Controllers/postcontroller.js')
 const app = express()
+app.use(express.static('public'))
 const host = 'http://127.0.0.1'
 const port = 3000
 
-app.get('/', (req, res) => {
-    res.send('<h1>Benvenuto nel mio blog!</h1>')
+app.get('/', (req, res) => { 
+    const markup = `
+    <h1>Benvenuto nel mio blog!</h1>
+    <img src="/img/f7a5b5a8-4cb2-403c-af51-70c820cd0837.webp" alt="post">
+    `
+    res.send(markup)
 })
 
 app.listen(port, () => {
