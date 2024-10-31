@@ -45,4 +45,3 @@ module.exports = {
     index
 }
 
-module.exports = posts
